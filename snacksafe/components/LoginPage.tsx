@@ -6,9 +6,9 @@ function LoginBox () {
     const responseMessage = (response: CredentialResponse) => {
         console.log(response);
     };
-    const errorMessage = (error) => {
-        console.log(error);
-    };
+    // const errorMessage = (error) => {
+    //     console.log(error);
+    // };
 	return (
         <div className="flex h-full items-center justify-center">
       <div className="flex w-[400px] h-[300px] bg-moss_green text-white rounded-md font-grotesk-bold font-bold text-2xl">
