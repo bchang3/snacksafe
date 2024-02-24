@@ -1,4 +1,13 @@
-import { serial, text, timestamp, pgTable, uuid, time, varchar, boolean } from "drizzle-orm/pg-core";
+import {
+  serial,
+  text,
+  timestamp,
+  pgTable,
+  uuid,
+  time,
+  varchar,
+  boolean,
+} from "drizzle-orm/pg-core";
 export const user = pgTable("user", {
   id: serial("id"),
   name: text("name"),
@@ -17,6 +26,5 @@ export const profiles = pgTable("profile", {
   email: varchar("email"),
   has_set_password: boolean("has_set_password"),
   createdAt: timestamp("created_at"),
-  title: text("title")
+  title: text("title"),
 });
-

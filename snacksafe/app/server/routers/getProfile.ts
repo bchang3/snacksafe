@@ -1,9 +1,9 @@
-import { db } from '../../db/index';
-import { profiles } from '../../db/schema';
-import { eq, and } from 'drizzle-orm';
-import { z } from 'zod';
-import { procedure, router } from '../routers/trpc';
-import { User } from '@supabase/supabase-js';
+import { db } from "../../db/index";
+import { profiles } from "../../db/schema";
+import { eq, and } from "drizzle-orm";
+import { z } from "zod";
+import { procedure, router } from "../routers/trpc";
+import { User } from "@supabase/supabase-js";
 
 // export const profilesRouter = router({
 // 	profile: procedure.query(async () => {

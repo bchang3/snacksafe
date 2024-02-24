@@ -21,16 +21,21 @@ export default function Index() {
           setUserData(user);
           setLoggedIn(true);
           const userId = user["id"];
-          const { data: profile } = await supabase.from("profiles").select().eq("id", userId).limit(1).single();
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select()
+            .eq("id", userId)
+            .limit(1)
+            .single();
           setProfileData(() => {
             return profile;
           });
           const currentTime = new Date();
-          const createdTime = new Date(user.created_at)
-          const currentTimeSeconds = Math.floor(currentTime.getTime() / 1000)
-          const createdTimeSeconds = Math.floor(createdTime.getTime() / 1000)
+          const createdTime = new Date(user.created_at);
+          const currentTimeSeconds = Math.floor(currentTime.getTime() / 1000);
+          const createdTimeSeconds = Math.floor(createdTime.getTime() / 1000);
           if (currentTimeSeconds - createdTimeSeconds < 10) {
-            window.location.href = '/preferences'
+            window.location.href = "/preferences";
           }
         }
 
