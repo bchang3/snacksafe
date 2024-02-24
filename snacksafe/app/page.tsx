@@ -30,6 +30,7 @@ export default async function Index() {
         <div className="flex justify-center h-fit w-4/5 text-beige bg-moss_green rounded-lg text-4xl font-grotesk-bold">
           <div className="mt-4">Snacksafe</div>
         </div>
+
       </div>
     </div>
   );
