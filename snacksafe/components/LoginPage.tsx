@@ -2,6 +2,7 @@
 import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { Router} from "react-router-dom";
 function LoginBox () {
     const responseMessage = (response: CredentialResponse) => {
         console.log(response);
@@ -9,6 +10,10 @@ function LoginBox () {
     // const errorMessage = (error) => {
     //     console.log(error);
     // };
+    const signin = () => {
+        window.location.href = '/preferences'
+
+    };
 	return (
         <div className="flex h-full items-center justify-center">
       <div className="flex w-[400px] h-[300px] bg-moss_green text-white rounded-md font-grotesk-bold font-bold text-2xl">
@@ -29,7 +34,7 @@ function LoginBox () {
             
           </div>
           <div className="flex justify-center mt-2">
-            <Button className="bg-white w-3/4 text-black">Sign up with email </Button>
+            <Button className="bg-white w-3/4 text-black" onClick={signin}>Sign up with email </Button>
           </div>
           <div className="flex justify-center mt-8">
           <GoogleOAuthProvider clientId = "664128447145-oli15ris18qh9hqitkclibencdld2ohe.apps.googleusercontent.com">

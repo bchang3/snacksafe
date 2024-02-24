@@ -22,6 +22,7 @@ module.exports = {
         },
         moss_green: {
 					DEFAULT: '#283618',
+          secondary: '#1c8035'
 				},
         white: {
 					DEFAULT: '#FEFDFD',
