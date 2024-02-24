@@ -1,23 +1,49 @@
+"use client"
 import DeployButton from "../components/DeployButton";
 import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@supabase/supabase-js";
 import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Header from "@/components/Header";
+import React, { useState } from "react";
 
 export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+  const [loggedIn, setLoggedIn] = useState(false)
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
-  const isSupabaseConnected = canInitSupabaseClient();
+    const getUserData = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      return user;
+  }
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          setLoggedIn(true)
+        }
+
+        // Do something with the user data
+      } catch(error) {
+        console.log("error")
+      }
+    }
+      fetchData();
+  }, [])
+  // const canInitSupabaseClient = () => {
+  //   // This function is just for the interactive tutorial.
+  //   // Feel free to remove it once you have Supabase connected.
+  //   try {
+  //     createClient();
+  //     return true;
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // };
+
+  // const isSupabaseConnected = canInitSupabaseClient();
 
   return (
     <div className="flex h-screen items-center justify-center">

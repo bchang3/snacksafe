@@ -82,7 +82,9 @@ export default function Preferences() {
         </div>
       </div>
       <div className="flex justify-end">
-        <button className='flex h-14 w-48 bg-moss_green-secondary mt-8 rounded-md justify-center items-center'>Submit</button>
+        <button className="flex h-14 w-48 bg-moss_green-secondary mt-8 rounded-md justify-center items-center">
+          Submit
+        </button>
       </div>
     </div>
   );
