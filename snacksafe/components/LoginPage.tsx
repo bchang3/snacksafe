@@ -2,16 +2,13 @@
 import { CredentialResponse, GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Router} from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeMinimal } from "@supabase/auth-ui-shared";
+import { supabase } from "@/utils/supabase/client";
+// import { createClient } from "@supabase/supabase-js";
 
 function LoginBox () {
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
-
+    
     const responseMessage = (response: CredentialResponse) => {
 
         console.log(response);
@@ -32,7 +29,6 @@ function LoginBox () {
           
             },
           })
-        console.log("HERE")
     }
     const signin = () => {
         window.location.href = '/preferences'

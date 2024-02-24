@@ -68,6 +68,7 @@ const config = {
 				},
 				beige: {
 					DEFAULT: '#fefae0',
+          secondary: '#e8e4c8'
 				}
       },
       borderRadius: {
