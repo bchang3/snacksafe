@@ -6,6 +6,19 @@ import SearchBar from "@/components/SearchBar";
 import { supabase } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import RestaurantCard from "@/components/RestaurantCard";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { CopyIcon } from "lucide-react";
+import { Input } from "postcss";
 interface Restaurant {
   restaurantName: string;
   restaurantImage: string;
@@ -100,25 +113,41 @@ export default function Index() {
         setLoggedIn={setLoggedIn}
         profile={profileData}
       ></Header>
+      
+
       <div className="flex justify-center items-center pt-12 pb-8">
         <SearchBar />
       </div>
       <div className="flex justify-center items-center">
-        <div className="flex justify-center h-full w-1/2 text-beige bg-moss_green rounded-xl">
+        <div className="flex justify-center h-full w-full text-beige bg-moss_green">
           <div className="flex flex-col justify-center">
             <div className="flex justify-center mt-4  text-4xl font-grotesk-bold">
               Snacksafe
             </div>
             <div>
               {RestaurantData.map((restaurant) => (
-                <RestaurantCard
+                <div>
+                <Dialog>
+                <DialogTrigger className=""><RestaurantCard
                   key={restaurant.restaurantName}
                   restaurantName={restaurant.restaurantName}
                   distance={restaurant.distance}
                   restaurantImage={restaurant.restaurantImage}
                   safety={restaurant.safety}
                   rating={restaurant.rating}
-                ></RestaurantCard>
+                ></RestaurantCard></DialogTrigger>
+                <DialogContent className="w-screen h-3/4 bg-beige">
+                  <DialogHeader>
+                    <DialogTitle className="text-black">Are you absolutely sure?</DialogTitle>
+                    <DialogDescription className="text-black">
+                      This action cannot be undone. This will permanently delete your
+                      account and remove your data from our servers.
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+              </div>
+                
               ))}
             </div>
           </div>
