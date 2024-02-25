@@ -55,8 +55,10 @@ export default function Preferences() {
           .eq("id", userId)
           .limit(1)
           .single();
-          console.log(restrictions.restrictions);
-        setSelectedOptions(restrictions.restrictions);
+          if (restrictions != null){
+            setSelectedOptions(restrictions.restrictions);
+          }
+
       }
     };
     fetchData();
