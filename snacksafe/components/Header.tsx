@@ -19,7 +19,7 @@ interface HeaderProps {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: getURL(),
+          redirectTo: "https://snacksafe.vercel.app",
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
