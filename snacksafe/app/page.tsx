@@ -27,9 +27,15 @@ export default function Index() {
             .eq("id", userId)
             .limit(1)
             .single();
-          setProfileData(() => {
-            return profile;
-          });
+          if (profile) {
+            setProfileData(() => {
+              return profile;
+            });
+          } else {
+            console.log(profileData)
+            setLoggedIn(false);
+          }
+          
           const currentTime = new Date();
           const createdTime = new Date(user.created_at);
           const currentTimeSeconds = Math.floor(currentTime.getTime() / 1000);
