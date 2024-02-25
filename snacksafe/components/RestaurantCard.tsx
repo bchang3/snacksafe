@@ -26,16 +26,17 @@ export default function RestaurantCard({ restaurantName, restaurantImage, distan
   const getColorSafety = (num: number) => {
     return (num <= safety)
   }
+ 
   return (
     <div className="">
-          <div className="flex bg-beige text-black mb-4 rounded-xl h-24 w-96 mt-4 border-moss_green-secondary border-2">
-            <div className="flex flex-row w-full items-center">
+          <div className="flex bg-beige hover:bg-beige-secondary text-black mb-4 rounded-xl h-24 w-96 mt-4 border-moss_green-secondary overflow-hidden border-2">
+            <div className="flex flex-row w-full items-center ">
               {/* <FaBowlFood className="h-24 w-24 ml-4 mr-4"/> */}
-              <div className="flex items-center ml-4 h-48 w-48 rounded-xl">
-              <img className="rounded-xl border-black border-1" src={restaurantImage}></img>
+              <div className="flex items-center ml-4 rounded-xl h-44 w-44 overflow-hidden">
+              <img className="rounded-xl border-black border-1 object-fill h-18 w-18 overflow-hidden" src={restaurantImage}></img>
               </div>
               <div className="flex w-full">
-                <div className="ml-2 text-xl w-full font-grotesk-regular">{restaurantName}</div>
+                <div className="ml-2 text-lg w-full font-grotesk-regular object-contain">{restaurantName}</div>
               </div>
               <div className="flex w-full mr-2 justify-end text-sm text-14 font-normal h-full" aria-hidden="true">
                 <div className="flex flex-col h-full">

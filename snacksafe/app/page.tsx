@@ -46,7 +46,6 @@ export default function Index() {
     console.log("hi");
   };
 
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<User>();
   const [restaurants, setRestaurants] = useState<any[]>([]);
@@ -58,23 +57,66 @@ export default function Index() {
   const getColorSafety = (num: number, safety: number) => {
     return num <= safety;
   };
-  let RestaurantData: Restaurant[] = []
+  let RestaurantData: Restaurant[] = [];
 
-
+  function getRandom(min: number, max: number) {
+    return Math.random() * (max - min) + min;
+  }
   React.useEffect(() => {
     const fetchData = async () => {
       const { data: restaurants } = await supabase.from("Restaurants").select();
-      let tempRestaurantData: Restaurant[] = []
+      let tempRestaurantData: Restaurant[] = [];
       if (restaurants) {
-        console.log(restaurants)
-        restaurants.map((restaurant) => (
-          tempRestaurantData.push({restaurantName: restaurant.name, restaurantImage: restaurant.image_url, distance: "0.5mi", safety:3, rating:restaurant.rating, address:restaurant.address, phone:restaurant.phone, description:"test",reviews:[{reviewer:"Claire", review:"good", safety:2, rating: 3}]})
-        ))
+        console.log(restaurants);
+        restaurants.map((restaurant) =>
+          tempRestaurantData.push({
+            restaurantName: restaurant.name,
+            restaurantImage: restaurant.image_url,
+            distance: getRandom(0, 2).toString().substring(0, 3) + "mi",
+            safety: getRandom(0, 4),
+            rating: getRandom(0, 4),
+            address: restaurant.address,
+            phone: restaurant.phone,
+            description: "This restaurant is a great choice for vegan and vegetarian people. It has consistently been praised for its excellent customer service, but occasionally has cross contamination and subpar safety practices. ",
+            reviews: [
+              
+              {
+                reviewer: "Shoorsen",
+                review:
+                  "AVOID AT ALL COSTS. Had an allergic reation to the `milk free` boba.",
+                safety: 0,
+                rating: 0,
+              },
+              {
+                reviewer: "Avi",
+                review:
+                  "Loved the food! The vegetarian options were great and the menu items were all customizable.",
+                safety: 2,
+                rating: 3,
+              },
+              {
+                reviewer: "Benji",
+                review:
+                  "The waiter made sure to ask if I had allergies, but the food took almost an hour to come out. Overall, would recommend not going around peak hours.",
+                safety: 2,
+                rating: 1,
+              },
+              {
+                reviewer: "Claire",
+                review:
+                  "I really liked the service here! Staff was friendly and very accomodating",
+                safety: 3,
+                rating: 3,
+              },
+              
+            ],
+          }),
+        );
         console.log(tempRestaurantData);
-        setRestaurantData(tempRestaurantData);
+        setRestaurantData(tempRestaurantData.slice(0, 5));
         setRestaurants(restaurants);
       }
-      
+
       try {
         const {
           data: { user },
@@ -155,9 +197,9 @@ export default function Index() {
                                 {restaurant.restaurantName}
                               </DialogTitle>
                               <div className="flex w-full justify-end">
-                                <div className="flex items-center ml-4 h-14 w-14 rounded-xl object-contain">
+                                <div className="flex items-center ml-4 h-48 w-48 rounded-xl object-scale-down overflow-hidden border-black border-2">
                                   <img
-                                    className="rounded-xl border-black border-1 h-30 w-30"
+                                    className="rounded-xl border-black border-1 h-48 w-48 overflow-hidden object-fill"
                                     src={restaurant.restaurantImage}
                                   ></img>
                                 </div>
