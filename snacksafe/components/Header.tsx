@@ -2,7 +2,7 @@
 import { User, createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { Avatar, AvatarImage } from './ui/avatar';
-import { supabase } from '@/utils/supabase/client';
+import { getURL, supabase } from '@/utils/supabase/client';
 
 interface HeaderProps {
   loggedin: boolean
@@ -14,10 +14,12 @@ interface HeaderProps {
   setLoggedIn,
   profile = {avatar_url: "", first_name: ""}
 }) => { 
+  
   const signInWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
+          redirectTo: getURL(),
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
