@@ -1,15 +1,17 @@
 import Link from 'next/link';
+import { FaBowlFood } from "react-icons/fa6";
+import { LiaStarSolid } from "react-icons/lia";
+import { IoShieldCheckmark } from "react-icons/io5";
+
+
 
 type TRestaurantDataPrimary = {
   restaurantName: string;
-  restaurantImage: {
-      src: string;
-      alt: string;
-  };
+  restaurantImage: string;
   distance: string;
-  deliveryTime: string;
-  pickupTime: string;
-  isDashPass: boolean;
+  safety: number;
+  rating: number;
+
 };
 
 type TRestaurantCard = {
@@ -17,24 +19,61 @@ type TRestaurantCard = {
     restaurantData: TRestaurantDataPrimary;
 }
 
-export default function RestaurantCard({ restaurantID, restaurantData }: TRestaurantCard) {
-
+export default function RestaurantCard({ restaurantName, restaurantImage, distance, safety, rating }: TRestaurantDataPrimary) {
+  const getColorRating = (num: number) => {
+    return (num <= rating)
+  }
+  const getColorSafety = (num: number) => {
+    return (num <= safety)
+  }
   return (
-    <article className="min-w-374 h-245 scroll-snap-align-start sm:flex-1 sm:min-w-[calc((100%-32px)/3)] md:flex-1 md:min-w-unset md:flex-0 md:calc((100%-16px)/2) lg:flex-0 lg:w-346 xl:flex-0 xl:w-293">
-      <Link href={`/store/${restaurantID}`} passHref legacyBehavior>
-        <a className="flex flex-col gap-14 text-decoration-none">
-          <div className="flex">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-6 m-2">
-                <span className="text-16 font-semibold">{restaurantData.restaurantName}</span>
+    <div className="">
+          <div className="flex bg-beige text-black mb-4 rounded-xl h-24 w-96 mt-4 border-moss_green-secondary border-2">
+            <div className="flex flex-row w-full items-center">
+              {/* <FaBowlFood className="h-24 w-24 ml-4 mr-4"/> */}
+              <div className="flex items-center ml-4 h-48 w-48 rounded-xl">
+              <img className="rounded-xl border-black border-1" src={restaurantImage}></img>
               </div>
-              <span className="text-14 font-normal text-quinary-gray" aria-hidden="true">
-                {restaurantData.distance} • {restaurantData.deliveryTime} • $0 delivery fee over $12
-              </span>
+              <div className="flex w-full">
+                <div className="ml-2 text-xl w-full font-grotesk-regular">{restaurantName}</div>
+              </div>
+              <div className="flex w-full mr-2 justify-end text-sm text-14 font-normal h-full" aria-hidden="true">
+                <div className="flex flex-col h-full">
+                  <div className="flex font-grotesk-regular mt-1">{distance}</div>
+                  <div className="flex flex-row mt-8">
+                    <IoShieldCheckmark className={
+                      getColorSafety(1) ? 'fill-moss_green-secondary'
+                      : 'fill-red'
+                } />
+                    <IoShieldCheckmark className={
+                      getColorSafety(2) ? 'fill-moss_green-secondary'
+                      : 'fill-red'
+                } />
+                    <IoShieldCheckmark className={
+                      getColorSafety(3) ? 'fill-moss_green-secondary'
+                      : 'fill-red'
+                } />
+
+                  </div>
+                  <div className="flex flex-row mt-1">
+                    <LiaStarSolid className={
+                      getColorRating(1) ? 'fill-bronze'
+                      : ''
+                }></LiaStarSolid>
+                    <LiaStarSolid className={
+                      getColorRating(2) ? 'fill-bronze'
+                      : ''
+                }></LiaStarSolid>
+                    <LiaStarSolid className={
+                      getColorRating(3) ? 'fill-bronze'
+                      : ''
+                }></LiaStarSolid>
+                  </div>
+                
+                </div>
+              </div>
             </div>
           </div>
-        </a>
-      </Link>
-    </article>
+    </div>
   );
 }

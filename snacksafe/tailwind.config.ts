@@ -69,7 +69,13 @@ const config = {
 				beige: {
 					DEFAULT: '#fefae0',
           secondary: '#e8e4c8'
-				}
+				},
+        bronze: {
+          DEFAULT: '#b89530'
+        },
+        red: {
+          DEFAULT: '#bc4749'
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
