@@ -14,7 +14,7 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center justify-center w-4/5">
+    <form onSubmit={handleSubmit} className="flex items-center justify-center w-1/2">
       <button
         type="submit"
         className="bg-moss_green p-2 rounded-l flex items-center justify-center "
