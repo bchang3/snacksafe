@@ -7,6 +7,8 @@ import {
   time,
   varchar,
   boolean,
+  real,
+  integer,
 } from "drizzle-orm/pg-core";
 export const user = pgTable("user", {
   id: serial("id"),
@@ -27,4 +29,14 @@ export const profiles = pgTable("profile", {
   has_set_password: boolean("has_set_password"),
   createdAt: timestamp("created_at"),
   title: text("title"),
+});
+export const restaurants = pgTable("profile", {
+  id: text("id"),
+  name: text("name"),
+  safety_rating: real("safety_rating"),
+  address: text("address"),
+  review_count: integer("review_count"),
+  image_url: text("image_url"),
+  distance: real("distance"),
+  phone: text("phone"),
 });
