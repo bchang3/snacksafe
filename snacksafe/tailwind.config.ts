@@ -17,12 +17,19 @@ const config = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+			'grotesk-regular': ['grotesk-regular'],
+      'grotesk-light': ['grotesk-light'],
+      'grotesk-medium': ['grotesk-medium'],
+      'grotesk-bold': ['grotesk-bold'],
+
+		},
     extend: {
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: "#fefae0",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -52,6 +59,17 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        moss_green: {
+					DEFAULT: '#283618',
+          secondary: '#1c8035'
+				},
+        white: {
+					DEFAULT: '#FEFDFD',
+				},
+				beige: {
+					DEFAULT: '#fefae0',
+          secondary: '#e8e4c8'
+				}
       },
       borderRadius: {
         lg: "var(--radius)",

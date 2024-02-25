@@ -4,7 +4,7 @@ import {loadEnvConfig} from "@next/env";
 loadEnvConfig(process.cwd(), process.env.NODE_ENV !== "production");
 
 export default {
-  schema: "./src/db/schema.ts",
+  schema: "./app/db/schema.ts",
   out: "./drizzle",
   driver: "pg",
   dbCredentials: {

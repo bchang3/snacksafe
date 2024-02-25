@@ -1,14 +1,39 @@
 "use client"
-import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { CredentialResponse, GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeMinimal } from "@supabase/auth-ui-shared";
+import { supabase } from "@/utils/supabase/client";
+// import { createClient } from "@supabase/supabase-js";
+
 function LoginBox () {
+    
     const responseMessage = (response: CredentialResponse) => {
+
         console.log(response);
     };
     // const errorMessage = (error) => {
     //     console.log(error);
     // };
+    const signInWithGoogle = async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              queryParams: {
+                access_type: 'offline',
+                prompt: 'consent',
+                
+              },
+              
+          
+            },
+          })
+    }
+    const signin = () => {
+        window.location.href = '/preferences'
+
+    };
 	return (
         <div className="flex h-full items-center justify-center">
       <div className="flex w-[400px] h-[300px] bg-moss_green text-white rounded-md font-grotesk-bold font-bold text-2xl">
@@ -29,12 +54,14 @@ function LoginBox () {
             
           </div>
           <div className="flex justify-center mt-2">
-            <Button className="bg-white w-3/4 text-black">Sign up with email </Button>
+            <Button className="bg-white w-3/4 text-black hover:bg-slate-200" onClick={signin}>Sign up with email </Button>
           </div>
           <div className="flex justify-center mt-8">
-          <GoogleOAuthProvider clientId = "664128447145-oli15ris18qh9hqitkclibencdld2ohe.apps.googleusercontent.com">
+            {/* <Auth supabaseClient={supabase} appearance={{theme:ThemeMinimal}} theme="light" providers={["google"]}></Auth> */}
+            <button onClick={signInWithGoogle} className="h-8 w-24 bg-white"></button>
+          {/* <GoogleOAuthProvider clientId = "664128447145-oli15ris18qh9hqitkclibencdld2ohe.apps.googleusercontent.com">
             <GoogleLogin text="signup_with" onSuccess={responseMessage}></GoogleLogin>
-            </GoogleOAuthProvider>
+            </GoogleOAuthProvider> */}
             </div>
           <div>
           </div>
