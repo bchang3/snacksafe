@@ -72,6 +72,7 @@ export default function Index() {
           tempRestaurantData.push({
             restaurantName: restaurant.name,
             restaurantImage: restaurant.image_url,
+
             distance: getRandom(0, 2).toString().substring(0, 3) + "mi",
             safety: getRandom(0, 4),
             rating: getRandom(0, 4),
@@ -113,6 +114,7 @@ export default function Index() {
           }),
         );
         console.log(tempRestaurantData);
+
         setRestaurantData(tempRestaurantData.slice(0, 5));
         setRestaurants(restaurants);
       }
@@ -197,6 +199,7 @@ export default function Index() {
                                 {restaurant.restaurantName}
                               </DialogTitle>
                               <div className="flex w-full justify-end">
+
                                 <div className="flex items-center ml-4 h-48 w-48 rounded-xl object-scale-down overflow-hidden border-black border-2">
                                   <img
                                     className="rounded-xl border-black border-1 h-48 w-48 overflow-hidden object-fill"

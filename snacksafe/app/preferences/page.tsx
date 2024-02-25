@@ -42,6 +42,27 @@ export default function Preferences() {
       window.location.href = "/";
     }
   };
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        const userId = user["id"];
+        const { data: restrictions } = await supabase
+          .from("profiles")
+          .select("restrictions")
+          .eq("id", userId)
+          .limit(1)
+          .single();
+          if (restrictions != null){
+            setSelectedOptions(restrictions.restrictions);
+          }
+
+      }
+    };
+    fetchData();
+  }, []);
 
   const styles = "flex items-center w-96 h-24 rounded-md mt-4 justify-center";
   return (
