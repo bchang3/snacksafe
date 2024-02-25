@@ -112,7 +112,7 @@ export default function Index() {
     {
       restaurantName: "Teamoji",
       restaurantImage:
-        "https://lh3.googleusercontent.com/p/AF1QipM9JR4QVjRkF0yPSZ_owZft69EGePUeeIzlC34f=w768-h768-n-o-v1",
+        "https://lh3.googleusercontent.com/p/AF1QipM9JR4QVjRkF0yPSZ_owZft69EGePUeeIzlC34f=w150-h150-n-o-v1",
       distance: "0.2mi",
       safety: 3,
       rating: 3,
@@ -245,7 +245,7 @@ export default function Index() {
                             <div className="flex w-full justify-end">
                               <div className="flex items-center ml-4 h-30 w-30 rounded-xl">
                                 <img
-                                  className="rounded-xl border-black border-1"
+                                  className="rounded-xl border-black border-1 h-30 w-30"
                                   src={restaurant.restaurantImage}
                                 ></img>
                               </div>
@@ -259,7 +259,8 @@ export default function Index() {
                           </div>
                         </div>
                         <DialogDescription className="text-black mt-8 font-grotesk-regular text-lg">
-                          <div className="mt-4">{restaurant.description}</div>
+                          <div className="mt-4">{restaurant.description} <a href={"https://laoszechuanusa.com/menu/"} className="text-moss_green-secondary">SEE MENU</a></div>
+                          
                         </DialogDescription>
                         <div className="flex justify-center mt-6">
                           <ScrollArea className="text-justify h-36 w-5/6 border-black text-black rounded-md border-2 p-2 mt-4">
@@ -332,7 +333,7 @@ export default function Index() {
                         </div>
                         <div className="flex items-center flex-col w-full justify-center border-black text-black mt-18">
                           <Input
-                            className="mt-8 rounded-xl border-2"
+                            className="mt-10 rounded-xl border-2"
                             type="review"
                             placeholder="Leave a review ... "
                           />
