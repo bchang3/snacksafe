@@ -235,15 +235,15 @@ export default function Index() {
                         rating={restaurant.rating}
                       ></RestaurantCard>
                     </DialogTrigger>
-                    <DialogContent className="w-full h-3/4 bg-beige rounded-xl">
+                    <DialogContent className="w-3/4 h-5/6 bg-beige rounded-xl">
                       <DialogHeader className="rounded-xl">
                         <div className="flex flex-col">
-                          <div className="flex flex-row w-full">
-                            <DialogTitle className="text-black font-grotesk-bold text-6xl mt-6">
+                          <div className="flex flex-row">
+                            <DialogTitle className="text-black font-grotesk-bold text-5xl mt-6">
                               {restaurant.restaurantName}
                             </DialogTitle>
                             <div className="flex w-full justify-end">
-                              <div className="flex items-center ml-4 h-36 w-36 rounded-xl">
+                              <div className="flex items-center ml-4 h-30 w-30 rounded-xl">
                                 <img
                                   className="rounded-xl border-black border-1"
                                   src={restaurant.restaurantImage}
@@ -258,11 +258,11 @@ export default function Index() {
                             {restaurant.phone}
                           </div>
                         </div>
-                        <DialogDescription className="text-black mt-12 font-grotesk-regular text-lg">
-                          <div className="mt-8">{restaurant.description}</div>
+                        <DialogDescription className="text-black mt-8 font-grotesk-regular text-lg">
+                          <div className="mt-4">{restaurant.description}</div>
                         </DialogDescription>
-                        <div className="flex justify-center mt-2">
-                          <ScrollArea className="text-justify h-48 w-5/6 border-black text-black rounded-md border-2 p-2">
+                        <div className="flex justify-center mt-6">
+                          <ScrollArea className="text-justify h-36 w-5/6 border-black text-black rounded-md border-2 p-2 mt-4">
                             {restaurant.reviews.map((review) => (
                               <>
                                 <div key={review.reviewer} className="text-sm">
@@ -273,29 +273,54 @@ export default function Index() {
                                     <div className="font-grotesk-regular">
                                       {review.review}
                                     </div>
-                                    <div className="flex w-full justify-end">
-                                      <div className="flex flex-row">
-                                        <LiaStarSolid
-                                          className={
-                                            getColorRating(1, review.rating)
-                                              ? "fill-bronze"
-                                              : ""
-                                          }
-                                        ></LiaStarSolid>
-                                        <LiaStarSolid
-                                          className={
-                                            getColorRating(2, review.rating)
-                                              ? "fill-bronze"
-                                              : ""
-                                          }
-                                        ></LiaStarSolid>
-                                        <LiaStarSolid
-                                          className={
-                                            getColorRating(3, review.rating)
-                                              ? "fill-bronze"
-                                              : ""
-                                          }
-                                        ></LiaStarSolid>
+                                    <div className="flex w-full items-center justify-end">
+                                      <div className="flex flex-col">
+                                        <div className="flex flex-row">
+                                          <IoShieldCheckmark
+                                            className={
+                                              getColorSafety(1, review.safety)
+                                                ? "fill-moss_green-secondary"
+                                                : "fill-red"
+                                            }
+                                          ></IoShieldCheckmark>
+                                          <IoShieldCheckmark
+                                            className={
+                                              getColorSafety(2, review.safety)
+                                                ? "fill-moss_green-secondary"
+                                                : "fill-red"
+                                            }
+                                          ></IoShieldCheckmark>
+                                          <IoShieldCheckmark
+                                            className={
+                                              getColorSafety(3, review.safety)
+                                                ? "fill-moss_green-secondary"
+                                                : "fill-red"
+                                            }
+                                          ></IoShieldCheckmark>
+                                        </div>
+                                        <div className="flex flex-row">
+                                          <LiaStarSolid
+                                            className={
+                                              getColorRating(1, review.rating)
+                                                ? "fill-bronze"
+                                                : ""
+                                            }
+                                          ></LiaStarSolid>
+                                          <LiaStarSolid
+                                            className={
+                                              getColorRating(2, review.rating)
+                                                ? "fill-bronze"
+                                                : ""
+                                            }
+                                          ></LiaStarSolid>
+                                          <LiaStarSolid
+                                            className={
+                                              getColorRating(3, review.rating)
+                                                ? "fill-bronze"
+                                                : ""
+                                            }
+                                          ></LiaStarSolid>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -307,12 +332,12 @@ export default function Index() {
                         </div>
                         <div className="flex items-center flex-col w-full justify-center border-black text-black mt-18">
                           <Input
-                            className="mt-20 rounded-xl border-2"
+                            className="mt-8 rounded-xl border-2"
                             type="review"
                             placeholder="Leave a review ... "
                           />
                           <button
-                            className="flex items-center justify-center text-white border-moss_green border-4 font-grotesk-bold w-full h-10 bg-moss_green hover:bg-moss_green-secondary rounded-xl mt-2"
+                            className="flex items-center justify-center text-white border-moss_green border-4 hover:border-2 font-grotesk-bold w-full h-10 bg-moss_green hover:bg-moss_green-secondary rounded-xl mt-2"
                             type="submit"
                             onClick={handleSubmit}
                           >
