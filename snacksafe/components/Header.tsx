@@ -15,6 +15,7 @@ interface HeaderProps {
   profile = {avatar_url: "", first_name: ""}
 }) => { 
   
+
   const signInWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -29,6 +30,10 @@ interface HeaderProps {
       })
 } 
 // CHANGE BACK TO THIS LATER "https://snacksafe.vercel.app"
+const handleProfile = async () => {
+
+  window.location.href = "/preferences";
+}
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     setLoggedIn(false)
@@ -48,7 +53,9 @@ interface HeaderProps {
         {loggedin &&
         <div className="flex flex-row">
           <div className="text-white mr-4 font-grotesk-bold mt-2">Welcome, {profile.first_name}!</div>
+          <button className="avatar-button" onClick={handleProfile}>
            <Avatar className="mr-2"><AvatarImage src={profile.avatar_url}></AvatarImage></Avatar>
+           </button>
          <div className="bg-beige hover:bg-beige-secondary text-moss_green font-bold py-2 px-4 rounded">
         <button onClick={signOut}>
             Sign Out

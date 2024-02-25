@@ -46,15 +46,6 @@ export default function Index() {
     console.log("hi");
   };
 
-const handleSubmit = async () => {
-    const restaurantId = restaurant["id"];
-    const { data: profile } = await supabase
-      .from("reviews")
-      .upsert({id: 1, restaurantId: 0, reviewval: 0, accomval: 0})
-      .eq("id", restaurantId).select();
-    window.location.href = "/";
-};
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<User>();
   const [restaurants, setRestaurants] = useState<any[]>([]);
@@ -66,23 +57,34 @@ const handleSubmit = async () => {
   const getColorSafety = (num: number, safety: number) => {
     return num <= safety;
   };
-  let RestaurantData: Restaurant[] = []
-
+  let RestaurantData: Restaurant[] = [];
 
   React.useEffect(() => {
     const fetchData = async () => {
       const { data: restaurants } = await supabase.from("Restaurants").select();
-      let tempRestaurantData: Restaurant[] = []
+      let tempRestaurantData: Restaurant[] = [];
       if (restaurants) {
-        console.log(restaurants)
-        restaurants.map((restaurant) => (
-          tempRestaurantData.push({restaurantName: restaurant.name, restaurantImage: restaurant.image_url, distance: "0.5mi", safety:3, rating:restaurant.rating, address:restaurant.address, phone:restaurant.phone, description:"test",reviews:[{reviewer:"Claire", review:"good", safety:2, rating: 3}]})
-        ))
+        console.log(restaurants);
+        restaurants.map((restaurant) =>
+          tempRestaurantData.push({
+            restaurantName: restaurant.name,
+            restaurantImage: restaurant.image_url,
+            distance: "0.5mi",
+            safety: 3,
+            rating: restaurant.rating,
+            address: restaurant.address,
+            phone: restaurant.phone,
+            description: "test",
+            reviews: [
+              { reviewer: "Claire", review: "good", safety: 2, rating: 3 },
+            ],
+          }),
+        );
         console.log(tempRestaurantData);
         setRestaurantData(tempRestaurantData);
         setRestaurants(restaurants);
       }
-      
+
       try {
         const {
           data: { user },
@@ -114,11 +116,6 @@ const handleSubmit = async () => {
             window.location.href = "/preferences";
           }
         }
-        const { data, error } = await supabase
-        .from('Restaurants')
-        .select()
-        setRestaurantData(data);
-        
 
         // Do something with the user data
       } catch (error) {
