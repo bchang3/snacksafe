@@ -7,6 +7,8 @@ import { supabase } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import RestaurantCard from "@/components/RestaurantCard";
 import { Button } from "@/components/ui/button";
+import { LiaStarSolid } from "react-icons/lia";
+import { IoShieldCheckmark } from "react-icons/io5";
 import {
   Dialog,
   DialogTrigger,
@@ -18,18 +20,41 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { CopyIcon } from "lucide-react";
-import { Input } from "postcss";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+interface Review {
+  reviewer: string;
+  review: string;
+  safety: number;
+  rating: number;
+}
 interface Restaurant {
   restaurantName: string;
   restaurantImage: string;
   distance: string;
   safety: number;
   rating: number;
+  address: string;
+  phone: string;
+  description: string;
+  reviews: Review[];
 }
+
 export default function Index() {
+  const handleSubmit = async () => {
+    console.log("hi");
+  };
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<User>();
   const [profileData, setProfileData] = useState<any>();
+  const getColorRating = (num: number, rating: number) => {
+    return num <= rating;
+  };
+  const getColorSafety = (num: number, safety: number) => {
+    return num <= safety;
+  };
   const RestaurantData: Restaurant[] = [
     {
       restaurantName: "Lao Szechuan",
@@ -38,6 +63,24 @@ export default function Index() {
       distance: "1.0mi",
       safety: 0,
       rating: 3,
+      address: "608 E University Ave #105, Champaign, IL 61820",
+      phone: "(217) 689-0031",
+      description:
+        "Lao Szechuan is a chain Chinese restaurant based in the midwest. It ranks as highly popular, but some customers have reported a lack of strict allergy safety measures, such as adding nuts despite a request for no nuts. ",
+      reviews: [
+        { reviewer: "claire", review: "good", rating: 1, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 2, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 2, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "good", rating: 1, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 1, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 1, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 2, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+      ],
     },
     {
       restaurantName: "Shawarma Joint",
@@ -46,7 +89,26 @@ export default function Index() {
       distance: "2.0mi",
       safety: 3,
       rating: 3,
+      address: "627 E Green St Champaign, IL 61820",
+      phone: "(217) 689-0031",
+      description:
+        "Lao Szechuan is a chain Chinese restaurant based in the midwest. It ranks as highly popular, but some customers have reported a lack of strict allergy safety measures, such as adding nuts despite a request for no nuts. ",
+      reviews: [
+        { reviewer: "claire", review: "good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+      ],
     },
+
     {
       restaurantName: "Teamoji",
       restaurantImage:
@@ -54,6 +116,24 @@ export default function Index() {
       distance: "0.2mi",
       safety: 3,
       rating: 3,
+      address: "627 E Green St Champaign, IL 61820",
+      phone: "(217) 689-0031",
+      description:
+        "Lao Szechuan is a chain Chinese restaurant based in the midwest. It ranks as highly popular, but some customers have reported a lack of strict allergy safety measures, such as adding nuts despite a request for no nuts. ",
+      reviews: [
+        { reviewer: "claire", review: "good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+      ],
     },
     {
       restaurantName: "Brewlab Coffee",
@@ -62,6 +142,24 @@ export default function Index() {
       distance: "0.4mi",
       safety: 3,
       rating: 2,
+      address: "627 E Green St Champaign, IL 61820",
+      phone: "(217) 689-0031",
+      description:
+        "Lao Szechuan is a chain Chinese restaurant based in the midwest. It ranks as highly popular, but some customers have reported a lack of strict allergy safety measures, such as adding nuts despite a request for no nuts. ",
+      reviews: [
+        { reviewer: "claire", review: "good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "good", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "bad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "great", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sad", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "no.", rating: 3, safety: 2 },
+        { reviewer: "claire", review: "sooo good", rating: 3, safety: 2 },
+      ],
     },
   ];
 
@@ -113,7 +211,6 @@ export default function Index() {
         setLoggedIn={setLoggedIn}
         profile={profileData}
       ></Header>
-      
 
       <div className="flex justify-center items-center pt-12 pb-8">
         <SearchBar />
@@ -127,27 +224,105 @@ export default function Index() {
             <div>
               {RestaurantData.map((restaurant) => (
                 <div>
-                <Dialog>
-                <DialogTrigger className=""><RestaurantCard
-                  key={restaurant.restaurantName}
-                  restaurantName={restaurant.restaurantName}
-                  distance={restaurant.distance}
-                  restaurantImage={restaurant.restaurantImage}
-                  safety={restaurant.safety}
-                  rating={restaurant.rating}
-                ></RestaurantCard></DialogTrigger>
-                <DialogContent className="w-screen h-3/4 bg-beige">
-                  <DialogHeader>
-                    <DialogTitle className="text-black">Are you absolutely sure?</DialogTitle>
-                    <DialogDescription className="text-black">
-                      This action cannot be undone. This will permanently delete your
-                      account and remove your data from our servers.
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              </div>
-                
+                  <Dialog>
+                    <DialogTrigger className="">
+                      <RestaurantCard
+                        key={restaurant.restaurantName}
+                        restaurantName={restaurant.restaurantName}
+                        distance={restaurant.distance}
+                        restaurantImage={restaurant.restaurantImage}
+                        safety={restaurant.safety}
+                        rating={restaurant.rating}
+                      ></RestaurantCard>
+                    </DialogTrigger>
+                    <DialogContent className="w-full h-3/4 bg-beige rounded-xl">
+                      <DialogHeader className="rounded-xl">
+                        <div className="flex flex-col">
+                          <div className="flex flex-row w-full">
+                            <DialogTitle className="text-black font-grotesk-bold text-6xl mt-6">
+                              {restaurant.restaurantName}
+                            </DialogTitle>
+                            <div className="flex w-full justify-end">
+                              <div className="flex items-center ml-4 h-36 w-36 rounded-xl">
+                                <img
+                                  className="rounded-xl border-black border-1"
+                                  src={restaurant.restaurantImage}
+                                ></img>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-sm font-grotesk-regular text-black mt-1">
+                            {restaurant.address}
+                          </div>
+                          <div className="text-xs font-grotesk-regular text-black mt-1">
+                            {restaurant.phone}
+                          </div>
+                        </div>
+                        <DialogDescription className="text-black mt-12 font-grotesk-regular text-lg">
+                          <div className="mt-8">{restaurant.description}</div>
+                        </DialogDescription>
+                        <div className="flex justify-center mt-2">
+                          <ScrollArea className="text-justify h-48 w-5/6 border-black text-black rounded-md border-2 p-2">
+                            {restaurant.reviews.map((review) => (
+                              <>
+                                <div key={review.reviewer} className="text-sm">
+                                  <div className="font-grotesk-bold">
+                                    {review.reviewer}:
+                                  </div>
+                                  <div className="flex flex-row">
+                                    <div className="font-grotesk-regular">
+                                      {review.review}
+                                    </div>
+                                    <div className="flex w-full justify-end">
+                                      <div className="flex flex-row">
+                                        <LiaStarSolid
+                                          className={
+                                            getColorRating(1, review.rating)
+                                              ? "fill-bronze"
+                                              : ""
+                                          }
+                                        ></LiaStarSolid>
+                                        <LiaStarSolid
+                                          className={
+                                            getColorRating(2, review.rating)
+                                              ? "fill-bronze"
+                                              : ""
+                                          }
+                                        ></LiaStarSolid>
+                                        <LiaStarSolid
+                                          className={
+                                            getColorRating(3, review.rating)
+                                              ? "fill-bronze"
+                                              : ""
+                                          }
+                                        ></LiaStarSolid>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <Separator className="my-2 fill-black bg-black" />
+                              </>
+                            ))}
+                          </ScrollArea>
+                        </div>
+                        <div className="flex items-center flex-col w-full justify-center border-black text-black mt-18">
+                          <Input
+                            className="mt-20 rounded-xl border-2"
+                            type="review"
+                            placeholder="Leave a review ... "
+                          />
+                          <button
+                            className="flex items-center justify-center text-white border-moss_green border-4 font-grotesk-bold w-full h-10 bg-moss_green hover:bg-moss_green-secondary rounded-xl mt-2"
+                            type="submit"
+                            onClick={handleSubmit}
+                          >
+                            Send
+                          </button>
+                        </div>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               ))}
             </div>
           </div>
