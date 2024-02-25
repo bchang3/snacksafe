@@ -1,9 +1,12 @@
 "use client";
 import LoginBox from "@/components/LoginPage";
 import { Input } from "@/components/ui/input";
-import { createClient } from "@/utils/supabase/server";
+// import { createClient } from "@/utils/supabase/server";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import React, { ReactElement, useState } from "react";
+import { createClient } from '@supabase/supabase-js'
+
+
 export default function Preferences() {
   const options1: string[] = ["Nut Allergy", "Vegan", "Kosher", "Vegetarian"];
   const options2: string[] = [
@@ -12,6 +15,7 @@ export default function Preferences() {
     "Shellfish",
     "Gluten-free",
   ];
+  const supabase = createClient('postgresql://postgres:postgres@127.0.0.1:54322/postgres', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxY3ViaWlkc2dobHdreHVxbGVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg3MzkyMzIsImV4cCI6MjAyNDMxNTIzMn0.M8TTrya5DWKutPGLKdXcboERP6-b0oY6CjUhZ7phvmU')
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const isSelected = (option: string) => {
     return selectedOptions.some((selected) => selected === option);
@@ -24,6 +28,20 @@ export default function Preferences() {
     setSelectedOptions(updatedOptions);
     console.log(option);
   };
+  const handleSubmit = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+
+      const userId = user["id"];
+      const { data: profile } = await supabase
+        .from("profiles")
+        .update({ restrictions: selectedOptions })
+        .eq('id', userId)
+
+      }
+  }
 
   const styles = "flex items-center w-96 h-24 rounded-md mt-4 justify-center";
   return (
@@ -82,7 +100,7 @@ export default function Preferences() {
         </div>
       </div>
       <div className="flex justify-end">
-        <button className="flex h-14 w-48 bg-moss_green-secondary mt-8 rounded-md justify-center items-center">
+        <button className="flex h-14 w-48 bg-moss_green-secondary mt-8 rounded-md justify-center items-center" onClick={handleSubmit}>
           Submit
         </button>
       </div>

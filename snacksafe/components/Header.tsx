@@ -19,7 +19,6 @@ interface HeaderProps {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: "https://snacksafe.vercel.app",
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
@@ -28,7 +27,8 @@ interface HeaderProps {
       
         },
       })
-}
+} 
+// CHANGE BACK TO THIS LATER "https://snacksafe.vercel.app"
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     setLoggedIn(false)
