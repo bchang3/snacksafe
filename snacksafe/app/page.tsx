@@ -224,6 +224,7 @@ export default function Index() {
             <div>
               {RestaurantData.map((restaurant) => (
                 <div>
+                 
                   <Dialog>
                     <DialogTrigger className="">
                       <RestaurantCard
@@ -235,7 +236,9 @@ export default function Index() {
                         rating={restaurant.rating}
                       ></RestaurantCard>
                     </DialogTrigger>
+                    
                     <DialogContent className="w-3/4 h-5/6 bg-beige rounded-xl">
+                    <ScrollArea>
                       <DialogHeader className="rounded-xl">
                         <div className="flex flex-col">
                           <div className="flex flex-row">
@@ -346,8 +349,10 @@ export default function Index() {
                           </button>
                         </div>
                       </DialogHeader>
+                      </ScrollArea>
                     </DialogContent>
                   </Dialog>
+                  
                 </div>
               ))}
             </div>
